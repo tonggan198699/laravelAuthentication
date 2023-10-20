@@ -14,6 +14,7 @@ use DateTime;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Crypt;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
@@ -137,13 +138,15 @@ class UserController extends Controller
         return Hash::make($password);
     }
 
-    public function checkIfUserIsLoggedIn()
-    {
-        if ($user = Auth::user()) {
-            return $user->email;
-        }
-        return 'not logged in';
-    }
+//    public function checkIfUserIsLoggedIn(Request $request)
+//    {
+//        if ($user = Auth::user()) {
+//            $request->session()->put($user->id, 'tggerdgdgdfgf');
+//            return $request->session()->all();
+//            //return $user->email;
+//        }
+//        return 'not logged in';
+//    }
 
     public function getNow()
     {
@@ -174,6 +177,14 @@ class UserController extends Controller
         }
 
         return false;
+    }
+
+    public function logout()
+    {
+        if (Auth::user()) {
+            Auth::logout();
+            return 'you have logged out';
+        }
     }
 
 }

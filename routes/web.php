@@ -40,13 +40,17 @@ Route::get('/login',
    [UserController::class, 'login']
 );
 
-Route::get('/check',
-   [UserController::class, 'checkIfUserIsLoggedIn']
+Route::get('logout',
+   [UserController::class, 'logout']
 );
 
-Route::get('checktime',
-   [UserController::class, 'checktime']
-);
+//Route::get('/check',
+//   [UserController::class, 'checkIfUserIsLoggedIn']
+//);
+
+//Route::get('/check1',
+//           [UserController::class, 'check1']
+//);
 
 Route::get('/test',
            [UserController::class, 'test']
